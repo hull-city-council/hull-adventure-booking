@@ -44,13 +44,13 @@
     <script defer>
         window.addEventListener('load', function () {
             console.log(params.package != null);
-            if(params.package != null && typeof params.venue != null && params.types != null) {
+            if(params.package != null && params.types != null) {
                 document.getElementById("package").innerText = decodeURIComponent(params.package);
                 const script = document.createElement("script");
                 script.setAttribute("type", "text/javascript");
                 script.setAttribute("src", "//widgets.designmynight.com/bookings-partner.min.js");
                 script.setAttribute("dmn-booking-form", "true");
-                script.setAttribute("venue", params.venue);
+                script.setAttribute("venue", "6641df41c09cc05e86495193");
                 script.setAttribute("hide-offers", "false");
                 script.setAttribute("hide-powered-by", "false");
                 script.setAttribute("search-venues", "false");
