@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://hulladventure.co.uk/site/images/180G.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://hulladventure.co.uk/site/images/32G.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://hulladventure.co.uk/site/images/16g.png">
+    <link rel="stylesheet" type="text/css" href="https://onsass.designmynight.com/?theme=dark&body-text-color=%23ffffff&primary-color=%23ff9505&background-color=%2302291c">
+    <title>Hull Adventure - Bookin Online</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+        * {
+            font-family: "Outfit", sans-serif !important; 
+        }
+        h1 {
+            text-transform: uppercase;
+            margin-bottom: unset;
+        }
+        body {
+            background-color: #02291c;
+            color: #fff;
+        }
+        #app {
+            width: 100% !important;
+            display: flex;
+            justify-content: center !important;
+        }
+    </style>
+    <script>
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+    </script>
+</head>
+<body>
+
+    <main style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+        <h1>Book online</h1>
+        <p id="package"></p>
+        <div id="app"></div>
+    </main>
+
+    <script defer>
+        window.addEventListener('load', function () {
+            console.log(params.package != null);
+            if(params.package != null && typeof params.venue != null && params.types != null) {
+                document.getElementById("package").innerText = decodeURIComponent(params.package);
+                const script = document.createElement("script");
+                script.setAttribute("type", "text/javascript");
+                script.setAttribute("src", "//widgets.designmynight.com/bookings-partner.min.js");
+                script.setAttribute("dmn-booking-form", "true");
+                script.setAttribute("venue", params.venue);
+                script.setAttribute("hide-offers", "false");
+                script.setAttribute("hide-powered-by", "false");
+                script.setAttribute("search-venues", "false");
+                script.setAttribute("monday-first", "true");
+                script.setAttribute("allowed-types", params.types);
+                script.setAttribute("return-url", "/HullAdventure/briefing-registration");
+                document.getElementById("app").append(script);
+            } else {
+                document.getElementById("package").innerText = "Error: the required query parameters have not been provided.";
+            }
+
+        });
+    </script>
+</body>
+</html>
